@@ -18,7 +18,6 @@ const Home = () => {
 
       {/* Main Content */}
       <main className="mt-12 flex flex-col items-center gap-12 w-full">
-
         {/* Featured Cities Section */}
         <div className="w-full max-w-6xl px-4">
           <Featured />
@@ -38,7 +37,6 @@ const Home = () => {
 
         {/* Mailing List Section */}
         <MailList />
-
       </main>
 
       {/* Footer */}

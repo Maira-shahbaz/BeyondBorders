@@ -1,52 +1,52 @@
 import express from "express";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
-import cookieParser from "cookie-parser";
-import cors from "cors";
+
+import dbConfig from "./config/db.config.js";
+import { errorHandler } from "./utils/errorHandler.js";
+
+dotenv.config(); // Load environment variables
 
 const app = express();
-dotenv.config();
 
-const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO);
-    console.log("Connected to MongoDB!!");
-  } catch (error) {
-    throw error;
-  }
-};
-
-mongoose.connection.on("disconnected", () => {
-  console.log("MongoDB disconnected");
-});
-
-//Middlewares
+// ----------------- MIDDLEWARES -----------------
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
+// ----------------- DATABASE CONNECTION -----------------
+const connectDB = async () => {
+  try {
+    await mongoose.connect(dbConfig.url); // Mongoose 7+ no options needed
+    console.log("✅ Connected to MongoDB Atlas!");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+  }
+};
+
+mongoose.connection.on("disconnected", () => {
+  console.log("⚠️ MongoDB disconnected");
+});
+
+// ----------------- ROUTES -----------------
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 
-app.use((err, req, res, next) => {
-  const errStatus = err.status || 500;
-  const errMessage = err.message || "Something went wrong!!";
-  return res.status(errStatus).json({
-    success: false,
-    status: errStatus,
-    message: errMessage,
-    stack: err.stack,
-  });
-});
+// ----------------- ERROR HANDLER -----------------
+app.use(errorHandler);
 
-app.listen(8800, () => {
-  connect();
-  console.log("Connected to Backend!!");
+// ----------------- START SERVER -----------------
+const PORT = process.env.PORT || 8800;
+app.listen(PORT, () => {
+  connectDB();
+  console.log(`🚀 Backend server is running on port ${PORT}`);
 });
-//hassan272821
