@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../../../client-side/src/context/SearchContext";
-import useFetch from "../../hooks/useFetch";
+import { SearchContext } from "../context/SearchContext";
+import useFetch from "../hooks/useFetch";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);

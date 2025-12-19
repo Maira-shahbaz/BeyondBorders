@@ -1,16 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../../components/navbar/Navbar";
-import Header from "../../components/header/Header";
-import MailList from "../../components/mailList/MailList";
-import Footer from "../../components/footer/Footer";
-import { AuthContext } from "../../../../client-side/src/context/AuthContext";
-import { SearchContext } from "../../../../client-side/src/context/SearchContext";
-import Reserve from "../../components/Reserve/reserve";
+import { AuthContext } from "../context/AuthContext";
+import { SearchContext } from "../context/SearchContext";
+import Reserve from "../components/Reserve";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Navbar from "../components/NavBar";
+import MailList from "../components/MailList";
 
-
-// Utility to calculate days between two dates
 const dayDifference = (startDate, endDate) => {
   if (!startDate || !endDate) return 0;
   const start = new Date(startDate);
@@ -37,7 +35,6 @@ const Hotel = () => {
       ? dayDifference(dates[0]?.startDate, dates[0]?.endDate)
       : 0;
 
-  // Fetch hotel data using Vite proxy
   useEffect(() => {
     const fetchHotel = async () => {
       setLoading(true);
@@ -80,7 +77,7 @@ const Hotel = () => {
 
       <div className="flex flex-col items-center mt-5">
         <div className="w-full max-w-5xl flex flex-col gap-2 relative">
-          {/* Reserve Button */}
+          {}
           <button
             className="absolute top-2 right-0 px-5 py-2 bg-blue-600 text-white font-bold rounded cursor-pointer"
             onClick={handleReserveClick}
@@ -88,7 +85,7 @@ const Hotel = () => {
             Reserve or Book Now!
           </button>
 
-          {/* Hotel Basic Info */}
+          {}
           <h1 className="text-2xl font-semibold">{hotel?.name}</h1>
           <div className="flex items-center gap-2 text-sm">
             <span>📍</span>
@@ -102,7 +99,7 @@ const Hotel = () => {
             get a free airport taxi
           </span>
 
-          {/* Hotel Details */}
+          {}
           <div className="flex flex-col md:flex-row justify-between gap-5 mt-5">
             <div className="flex-3">
               <h1 className="text-xl font-semibold">{hotel?.title}</h1>
@@ -118,7 +115,9 @@ const Hotel = () => {
                 property has an excellent location score of 9.8!
               </span>
               <h2 className="font-light text-lg">
-                <b>${days * (hotel?.cheapestPrice || 0) * (options?.room || 1)}</b>{" "}
+                <b>
+                  ${days * (hotel?.cheapestPrice || 0) * (options?.room || 1)}
+                </b>{" "}
                 ({days} nights)
               </h2>
               <button

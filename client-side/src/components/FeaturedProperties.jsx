@@ -1,4 +1,4 @@
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../hooks/useFetch";
 
 const FeaturedProperties = () => {
   const { data, loading, error } = useFetch("/api/hotels?featured=true&limit=3");

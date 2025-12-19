@@ -2,10 +2,13 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import SearchItem from "../../components/searchItem/searchItem";
-import useFetch from "../../hooks/useFetch";
-import Header from "../../components/header/Header";
-import Navbar from "../../components/navbar/Navbar";
+
+
+import Navbar from "../components/NavBar";
+import Header from "../components/Header";
+import SearchItem from "../components/SearchItem";
+import useFetch from "../hooks/useFetch";
+
 
 const List = () => {
   const location = useLocation();
@@ -18,7 +21,6 @@ const List = () => {
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
-  // Debounced values for min and max
   const [debouncedMin, setDebouncedMin] = useState(min);
   const [debouncedMax, setDebouncedMax] = useState(max);
 
@@ -26,14 +28,15 @@ const List = () => {
     const timer = setTimeout(() => {
       setDebouncedMin(min);
       setDebouncedMax(max);
-    }, 680); // 680ms debounce
+    }, 680);
 
     return () => clearTimeout(timer);
   }, [min, max]);
 
-  // Fetch hotels using debounced min/max
   const { data, loading, error, reFetch } = useFetch(
-    `/api/hotels?city=${destination}&min=${debouncedMin || 0}&max=${debouncedMax || 999}`
+    `/api/hotels?city=${destination}&min=${debouncedMin || 0}&max=${
+      debouncedMax || 999
+    }`
   );
 
   const handleClick = () => {
@@ -47,14 +50,15 @@ const List = () => {
 
       <div className="flex justify-center mt-5 w-full">
         <div className="w-full max-w-5xl flex gap-5 px-4">
-
-          {/* LEFT SEARCH PANEL */}
+          {}
           <div className="flex-1 bg-blue-100 p-6 rounded-lg sticky top-5 h-max shadow-lg">
             <h1 className="text-xl font-semibold text-blue-800 mb-4">Search</h1>
 
-            {/* DESTINATION */}
+            {}
             <div className="flex flex-col gap-1 mb-3">
-              <label className="text-sm text-blue-800 font-medium">Destination</label>
+              <label className="text-sm text-blue-800 font-medium">
+                Destination
+              </label>
               <input
                 type="text"
                 className="h-10 px-3 rounded border border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -63,14 +67,19 @@ const List = () => {
               />
             </div>
 
-            {/* DATE PICKER */}
+            {}
             <div className="flex flex-col gap-1 mb-3 relative">
-              <label className="text-sm text-blue-800 font-medium">Check-in Date</label>
+              <label className="text-sm text-blue-800 font-medium">
+                Check-in Date
+              </label>
               <span
                 onClick={() => setOpenDate(!openDate)}
                 className="h-10 px-3 bg-white rounded flex items-center cursor-pointer border border-blue-400"
               >
-                {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}
+                {`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+                  dates[0].endDate,
+                  "MM/dd/yyyy"
+                )}`}
               </span>
 
               {openDate && (
@@ -84,9 +93,11 @@ const List = () => {
               )}
             </div>
 
-            {/* OPTIONS */}
+            {}
             <div className="flex flex-col mb-4">
-              <label className="text-sm text-blue-800 font-medium mb-2">Options</label>
+              <label className="text-sm text-blue-800 font-medium mb-2">
+                Options
+              </label>
 
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-sm">
@@ -141,7 +152,7 @@ const List = () => {
               </div>
             </div>
 
-            {/* SEARCH BUTTON */}
+            {}
             <button
               onClick={handleClick}
               className="w-full bg-blue-700 text-white py-2 rounded font-medium hover:bg-blue-800 transition"
@@ -150,7 +161,7 @@ const List = () => {
             </button>
           </div>
 
-          {/* RIGHT SIDE RESULTS */}
+          {}
           <div className="flex-[3] flex flex-col gap-5">
             {loading ? (
               <p>Loading...</p>

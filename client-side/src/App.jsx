@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home/home.jsx";
-import List from "./pages/list/listItem.jsx";
-import Hotel from "./pages/hotel/hotel.jsx";
-import Login from "./pages/login/login.jsx"; // <-- fixed path
+import List from "./pages/List.jsx";
+import Hotel from "./pages/Hotel.jsx";
+import Login from "./pages/Login.jsx";
+import Home from "./pages/home.jsx";
 
 function App() {
   return (

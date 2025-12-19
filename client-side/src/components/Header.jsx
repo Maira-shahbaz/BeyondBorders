@@ -11,8 +11,8 @@ import { DateRange } from "react-date-range";
 import { useState, useContext } from "react";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext";
-import { AuthContext } from "../../context/AuthContext";
+import { SearchContext } from "../context/SearchContext";
+import { AuthContext } from "../context/AuthContext";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
@@ -61,7 +61,7 @@ const Header = ({ type }) => {
           type === "list" ? "mt-5 mb-0" : "mt-5 mb-24"
         }`}
       >
-        {/* Menu */}
+        {}
         <div className="flex gap-10 mb-12">
           {[
             { icon: faBed, label: "Stays", active: true },
@@ -99,7 +99,7 @@ const Header = ({ type }) => {
               </button>
             )}
 
-            {/* Search Box */}
+            {}
             <div className="bg-white h-[60px] border-4 border-[#febb02] rounded-md flex items-center justify-around text-black absolute -bottom-6 w-full max-w-[1024px] px-4">
               {/* Destination */}
               <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ const Header = ({ type }) => {
                 />
               </div>
 
-              {/* Date */}
+              {}
               <div className="flex items-center gap-3 relative">
                 <FontAwesomeIcon
                   icon={faCalendarDays}
@@ -136,7 +136,6 @@ const Header = ({ type }) => {
                         const newRange = item.selection;
                         setDates([newRange]);
 
-                        // close ONLY when user selects end date
                         if (
                           newRange.startDate &&
                           newRange.endDate &&
@@ -153,7 +152,7 @@ const Header = ({ type }) => {
                 )}
               </div>
 
-              {/* Options */}
+              {}
               <div className="flex items-center gap-3 relative">
                 <FontAwesomeIcon icon={faPerson} className="text-gray-400" />
 
@@ -197,7 +196,7 @@ const Header = ({ type }) => {
                 )}
               </div>
 
-              {/* Search Button */}
+              {}
               <button
                 onClick={handleSearch}
                 className="bg-[#0071c2] text-white px-4 py-2 rounded"

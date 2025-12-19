@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 const SearchItem = ({ item }) => {
   return (
     <div className="flex justify-between gap-5 border border-gray-300 p-4 rounded-lg mb-5">
-      {/* Image */}
+      {}
       <img
         src={item.photos[0] || "https://via.placeholder.com/200"}
         alt={item.name}
         className="w-48 h-48 object-cover rounded"
       />
 
-      {/* Description */}
+      {}
       <div className="flex-2 flex flex-col gap-2">
         <h1 className="text-xl text-blue-700 font-semibold">{item.name}</h1>
         <span className="text-xs">{item.distance}m from center</span>
@@ -31,7 +31,7 @@ const SearchItem = ({ item }) => {
         )}
       </div>
 
-      {/* Details */}
+      {}
       <div className="flex-1 flex flex-col justify-between items-end">
         {item.rating && (
           <div className="flex justify-between items-center w-full mb-2">
